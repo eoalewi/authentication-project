@@ -28,9 +28,12 @@ async function bootstrap() {
     .setVersion('1.0')
     .addBearerAuth()
     .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api/v1/docs', app, document);
-  app.use(helmet());
-  await app.listen(process.env.PORT || 3010);
-}
+    const document = SwaggerModule.createDocument(app, config);
+    SwaggerModule.setup('api/v1/docs', app, document);
+    app.use(helmet());
+  
+    const port = process.env.PORT || 3010;
+    console.log(`Listening on port ${port}`); // Log the port number for debugging
+    await app.listen(port);
+  }
 bootstrap();
