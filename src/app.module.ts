@@ -26,6 +26,11 @@ import { AuthModule } from './auth/auth.module';
         database: configService.get(EnvironmentConstant.DATABASE_NAME),
         entities: [join(process.cwd(), 'dist/**/*.entity.js')],
         synchronize: true,
+        extra: {
+          authPlugins: {
+            mysql_native_password: () => require('mysql2/lib/auth_plugins').mysql_native_password,
+          },
+        },
       }),
       inject: [ConfigService],
     }),
